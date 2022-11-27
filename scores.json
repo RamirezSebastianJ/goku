@@ -1,0 +1,76 @@
+{
+    "scores": [
+        {
+            "name": "Juan",
+            "score": 5
+        },
+        {
+            "name": "Daniel",
+            "score": 5
+        },
+        {
+            "name": "Nothis",
+            "score": 4
+        },
+        {
+            "name": "Juan",
+            "score": 3
+        },
+        {
+            "name": "Juan",
+            "score": 3
+        },
+        {
+            "name": "Juan",
+            "score": 3
+        },
+        {
+            "name": "Othe",
+            "score": 3
+        },
+        {
+            "name": " other",
+            "score": 2
+        },
+        {
+            "name": "Ninguna",
+            "score": 2
+        },
+        {
+            "name": "con clase\r",
+            "score": 2
+        },
+        {
+            "name": "Only2",
+            "score": 2
+        },
+        {
+            "name": "juana ",
+            "score": 1
+        },
+        {
+            "name": "Juan aruias",
+            "score": 1
+        },
+        {
+            "name": "nada",
+            "score": 1
+        },
+        {
+            "name": "ninguna",
+            "score": 1
+        },
+        {
+            "name": "one",
+            "score": 1
+        },
+        {
+            "name": "other\r",
+            "score": 1
+        },
+        {
+            "name": "othe",
+            "score": 1
+        }
+    ]
+}

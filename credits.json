@@ -1,0 +1,17 @@
+{
+  "creators": [
+    {
+      "name": "Daniel Franco Ibarra",
+      "email": "daniel.franco@upt.edu.co",
+      "program": "Ingeniería de Sistemas"
+    },
+    {
+      "name": "Juan Sebastian Ramirez Arias",
+      "email": "juansebastian.ramirez@upt.edu.co",
+      "program": "Ingeniería de Sistemas"
+    }
+  ],
+  "university": "Universidad Tecnología de Pereira",
+  "program": "Computación Gráfica",
+  "semester": "2022-2"
+}
