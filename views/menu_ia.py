@@ -30,7 +30,7 @@ WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 
 BG = pygame.image.load("imgs/Background.png")
 
-pipe_img = pygame.transform.scale2x(pygame.image.load(
+rock_img = pygame.transform.scale2x(pygame.image.load(
     os.path.join("imgs", "rock.png")).convert_alpha())
 
 bg_img = pygame.transform.scale(pygame.image.load(
@@ -78,7 +78,7 @@ def draw_menu(config_file,):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     score = manual(WIN, pygame, base_img,
-                                   pipe_img, player_images, bg_img)
+                                   rock_img, player_images, bg_img)
                     draw_game_over(score, WIN, pygame, background_menu)
                     WIN.blit(background_menu, (0, 0))
                 if PLAY_BUTTON_IA.checkForInput(MENU_MOUSE_POS):
@@ -125,7 +125,7 @@ def eval_genomes(genomes, config):
         ge.append(genome)
 
     base = Base(FLOOR, base_img)
-    pipes = [Rock(700,  pygame, pipe_img)]
+    rocks = [Rock(700,  pygame, rock_img)]
     score = 0
 
     clock = pygame.time.Clock()
@@ -142,12 +142,12 @@ def eval_genomes(genomes, config):
                 quit()
                 break
 
-        pipe_ind = 0
+        rock_ind = 0
         if len(players) > 0:
             # determine whether to use the first or second
-            if len(pipes) > 1 and players[0].x > pipes[0].x + pipes[0].PIPE_TOP.get_width():
+            if len(rocks) > 1 and players[0].x > rocks[0].x + rocks[0].ROCK_TOP.get_width():
                 # rock on the screen for neural network input
-                pipe_ind = 1
+                rock_ind = 1
 
         # give each player a fitness of 0.1 for each frame it stays alive
         for x, player in enumerate(players):
@@ -156,7 +156,7 @@ def eval_genomes(genomes, config):
 
             # send player location, top rock location and bottom rock location and determine from network whether to jump or not
             output = nets[players.index(player)].activate((player.y, abs(
-                player.y - pipes[pipe_ind].height), abs(player.y - pipes[pipe_ind].bottom)))
+                player.y - rocks[rock_ind].height), abs(player.y - rocks[rock_ind].bottom)))
 
             # we use a tanh activation function so result will be between -1 and 1. if over 0.5 jump
             if output[0] > 0.5:
@@ -165,8 +165,8 @@ def eval_genomes(genomes, config):
         base.move()
 
         rem = []
-        add_pipe = False
-        for rock in pipes:
+        add_rock = False
+        for rock in rocks:
             rock.move()
             # check for collision
             for player in players:
@@ -176,21 +176,21 @@ def eval_genomes(genomes, config):
                     ge.pop(players.index(player))
                     players.pop(players.index(player))
 
-            if rock.x + rock.PIPE_TOP.get_width() < 0:
+            if rock.x + rock.ROCK_TOP.get_width() < 0:
                 rem.append(rock)
 
             if not rock.passed and rock.x < player.x:
                 rock.passed = True
-                add_pipe = True
+                add_rock = True
 
-        if add_pipe:
+        if add_rock:
             score += 1
             for genome in ge:
                 genome.fitness += 5
-            pipes.append(Rock(WIN_WIDTH, pygame, pipe_img))
+            rocks.append(Rock(WIN_WIDTH, pygame, rock_img))
 
         for r in rem:
-            pipes.remove(r)
+            rocks.remove(r)
 
         for player in players:
             if player.y + player.img.get_height() - 10 >= FLOOR or player.y < -50:
@@ -198,5 +198,5 @@ def eval_genomes(genomes, config):
                 ge.pop(players.index(player))
                 players.pop(players.index(player))
 
-        draw_window(win, players, pipes, base, score, gen,
-                    pipe_ind, 'Agentes: '+str(len(players)), bg_img, pygame)
+        draw_window(win, players, rocks, base, score, gen,
+                    rock_ind, 'Agentes: '+str(len(players)), bg_img, pygame)

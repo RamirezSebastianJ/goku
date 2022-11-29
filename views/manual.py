@@ -6,9 +6,9 @@ from graphic.window import draw_window
 from shared.const import FLOOR, WIN_WIDTH
 
 
-def manual(window, pygame, base_img, pipe_img, player_images, bg_img):
+def manual(window, pygame, base_img, rock_img, player_images, bg_img):
     base = Base(FLOOR, base_img)
-    pipes = [Rock(700, pygame, pipe_img)]
+    rocks = [Rock(700, pygame, rock_img)]
     score = 0
     lives = 3
     livesCopy = 3
@@ -30,36 +30,36 @@ def manual(window, pygame, base_img, pipe_img, player_images, bg_img):
                 if event.key == pygame.K_SPACE:
                     player[0].jump()
 
-        pipe_ind = 0
+        rock_ind = 0
         if lives > 0:
-            if len(pipes) > 1 and player[0].x > pipes[0].x + pipes[0].PIPE_TOP.get_width():
+            if len(rocks) > 1 and player[0].x > rocks[0].x + rocks[0].ROCK_TOP.get_width():
                 # rock on the screen for neural network input
-                pipe_ind = 1
+                rock_ind = 1
 
         player[0].move()
         rem = []
-        add_pipe = False
-        for rock in pipes:
+        add_rock = False
+        for rock in rocks:
             rock.move()
             # check for collision
             if rock.collide(player[0]):
                 lives -= 1
                 break
             elif lives == livesCopy:
-                if rock.x + rock.PIPE_TOP.get_width() < 0:
+                if rock.x + rock.ROCK_TOP.get_width() < 0:
                     rem.append(rock)
 
                 if not rock.passed and rock.x < player[0].x:
                     rock.passed = True
-                    add_pipe = True
+                    add_rock = True
 
         if lives == livesCopy:
-            if add_pipe:
+            if add_rock:
                 score += 1
-                pipes.append(Rock(WIN_WIDTH,  pygame, pipe_img))
+                rocks.append(Rock(WIN_WIDTH,  pygame, rock_img))
 
             for r in rem:
-                pipes.remove(r)
+                rocks.remove(r)
 
             if player[0].y + player[0].img.get_height() - 10 >= FLOOR or player[0].y < -50:
                 lives -= 1
@@ -67,17 +67,17 @@ def manual(window, pygame, base_img, pipe_img, player_images, bg_img):
 
             if lives == livesCopy:
 
-                draw_window(window, player, pipes, base, score,
-                            0, pipe_ind, "Vidas: "+str(lives), bg_img, pygame)
+                draw_window(window, player, rocks, base, score,
+                            0, rock_ind, "Vidas: "+str(lives), bg_img, pygame)
             else:
                 base = Base(FLOOR, base_img)
-                pipes = [Rock(700, pygame, pipe_img)]
+                rocks = [Rock(700, pygame, rock_img)]
                 scores.append(score)
                 score = 0
 
         else:
             base = Base(FLOOR, base_img)
-            pipes = [Rock(700,  pygame, pipe_img)]
+            rocks = [Rock(700,  pygame, rock_img)]
             scores.append(score)
             score = 0
 

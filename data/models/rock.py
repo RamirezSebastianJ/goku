@@ -7,7 +7,7 @@ class Rock():
     GAP = 200
     VEL = 5
     
-    def __init__(self, x, pygame, pipe_img):
+    def __init__(self, x, pygame, rock_img):
         """
         initialize rock object
         :param x: int
@@ -21,8 +21,8 @@ class Rock():
         self.top = 0
         self.bottom = 0
 
-        self.PIPE_TOP = pygame.transform.flip(pipe_img, False, True)
-        self.PIPE_BOTTOM = pipe_img
+        self.ROCK_TOP = pygame.transform.flip(rock_img, False, True)
+        self.ROCK_BOTTOM = rock_img
         self.PYGAME = pygame
 
         self.passed = False
@@ -35,7 +35,7 @@ class Rock():
         :return: None
         """
         self.height = random.randrange(50, 450)
-        self.top = self.height - self.PIPE_TOP.get_height()
+        self.top = self.height - self.ROCK_TOP.get_height()
         self.bottom = self.height + self.GAP
 
     def move(self):
@@ -52,9 +52,9 @@ class Rock():
         :return: None
         """
         # draw top
-        win.blit(self.PIPE_TOP, (self.x, self.top))
+        win.blit(self.ROCK_TOP, (self.x, self.top))
         # draw bottom
-        win.blit(self.PIPE_BOTTOM, (self.x, self.bottom))
+        win.blit(self.ROCK_BOTTOM, (self.x, self.bottom))
 
     def collide(self, player):
         """
@@ -63,8 +63,8 @@ class Rock():
         :return: Bool
         """
         player_mask = player.get_mask()
-        top_mask = self.PYGAME.mask.from_surface(self.PIPE_TOP)
-        bottom_mask = self.PYGAME.mask.from_surface(self.PIPE_BOTTOM)
+        top_mask = self.PYGAME.mask.from_surface(self.ROCK_TOP)
+        bottom_mask = self.PYGAME.mask.from_surface(self.ROCK_BOTTOM)
         top_offset = (self.x - player.x, self.top - round(player.y))
         bottom_offset = (self.x - player.x, self.bottom - round(player.y))
 

@@ -2,22 +2,22 @@
 from shared.const import WIN_WIDTH
 
 
-def draw_window(win, players, pipes, base, score, gen, pipe_ind, message, bg_img, pygame):
+def draw_window(win, players, rocks, base, score, gen, rock_ind, message, bg_img, pygame):
     """
     draws the windows for the main game loop
     :param win: pygame window surface
     :param player: a Player object
-    :param pipes: List of pipes
+    :param rocks: List of rocks
     :param score: score of the game (int)
     :param gen: current generation
-    :param pipe_ind: index of closest rock
+    :param rock_ind: index of closest rock
     :return: None
     """
     if gen == 0:
         gen = 1
     win.blit(bg_img, (0, 0))
 
-    for rock in pipes:
+    for rock in rocks:
         rock.draw(win)
 
     base.draw(win)
@@ -29,9 +29,9 @@ def draw_window(win, players, pipes, base, score, gen, pipe_ind, message, bg_img
         if DRAW_LINES:
             try:
                 pygame.draw.line(win, (255, 0, 0), (player.x+player.img.get_width()/2, player.y + player.img.get_height(
-                )/2), (pipes[pipe_ind].x + pipes[pipe_ind].PIPE_TOP.get_width()/2, pipes[pipe_ind].height), 5)
+                )/2), (rocks[rock_ind].x + rocks[rock_ind].ROCK_TOP.get_width()/2, rocks[rock_ind].height), 5)
                 pygame.draw.line(win, (255, 0, 0), (player.x+player.img.get_width()/2, player.y + player.img.get_height(
-                )/2), (pipes[pipe_ind].x + pipes[pipe_ind].PIPE_BOTTOM.get_width()/2, pipes[pipe_ind].bottom), 5)
+                )/2), (rocks[rock_ind].x + rocks[rock_ind].ROCK_BOTTOM.get_width()/2, rocks[rock_ind].bottom), 5)
             except:
                 pass
         # draw player
