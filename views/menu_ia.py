@@ -35,7 +35,7 @@ pipe_img = pygame.transform.scale2x(pygame.image.load(
 
 bg_img = pygame.transform.scale(pygame.image.load(
     os.path.join("imgs", "bg.png")).convert_alpha(), (600, 900))
-bird_images = [pygame.transform.scale2x(pygame.image.load(
+player_images = [pygame.transform.scale2x(pygame.image.load(
     os.path.join("imgs", "player" + str(x) + ".png"))) for x in range(1, 4)]
 base_img = pygame.transform.scale2x(pygame.image.load(
     os.path.join("imgs", "base.png")).convert_alpha())
@@ -78,7 +78,7 @@ def draw_menu(config_file,):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     score = manual(WIN, pygame, base_img,
-                                   pipe_img, bird_images, bg_img)
+                                   pipe_img, player_images, bg_img)
                     draw_game_over(score, WIN, pygame, background_menu)
                     WIN.blit(background_menu, (0, 0))
                 if PLAY_BUTTON_IA.checkForInput(MENU_MOUSE_POS):
@@ -121,7 +121,7 @@ def eval_genomes(genomes, config):
         genome.fitness = 0  # start with fitness level of 0
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         nets.append(net)
-        players.append(Player(230, 350, bird_images, pygame))
+        players.append(Player(230, 350, player_images, pygame))
         ge.append(genome)
 
     base = Base(FLOOR, base_img)

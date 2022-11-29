@@ -62,14 +62,14 @@ class Rock():
         :param player: Player object
         :return: Bool
         """
-        bird_mask = player.get_mask()
+        player_mask = player.get_mask()
         top_mask = self.PYGAME.mask.from_surface(self.PIPE_TOP)
         bottom_mask = self.PYGAME.mask.from_surface(self.PIPE_BOTTOM)
         top_offset = (self.x - player.x, self.top - round(player.y))
         bottom_offset = (self.x - player.x, self.bottom - round(player.y))
 
-        b_point = bird_mask.overlap(bottom_mask, bottom_offset)
-        t_point = bird_mask.overlap(top_mask, top_offset)
+        b_point = player_mask.overlap(bottom_mask, bottom_offset)
+        t_point = player_mask.overlap(top_mask, top_offset)
 
         if b_point or t_point:
             return True

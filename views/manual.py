@@ -6,14 +6,14 @@ from graphic.window import draw_window
 from shared.const import FLOOR, WIN_WIDTH
 
 
-def manual(window, pygame, base_img, pipe_img, bird_images, bg_img):
+def manual(window, pygame, base_img, pipe_img, player_images, bg_img):
     base = Base(FLOOR, base_img)
     pipes = [Rock(700, pygame, pipe_img)]
     score = 0
     lives = 3
     livesCopy = 3
     win = window
-    player = [Player(230, 350, bird_images, pygame)]
+    player = [Player(230, 350, player_images, pygame)]
     clock = pygame.time.Clock()
     scores = []
     while lives > 0:
@@ -63,7 +63,7 @@ def manual(window, pygame, base_img, pipe_img, bird_images, bg_img):
 
             if player[0].y + player[0].img.get_height() - 10 >= FLOOR or player[0].y < -50:
                 lives -= 1
-                player = [Player(230, 350, bird_images, pygame)]
+                player = [Player(230, 350, player_images, pygame)]
 
             if lives == livesCopy:
 

@@ -8,7 +8,7 @@ class Player:
     ROT_VEL = 20
     ANIMATION_TIME = 5
 
-    def __init__(self, x, y, bird_images, pygame):
+    def __init__(self, x, y, player_images, pygame):
         """
         Initialize the object
         :param x: starting x pos (int)
@@ -22,7 +22,7 @@ class Player:
         self.vel = 0
         self.height = self.y
         self.img_count = 0
-        self.IMGS = bird_images
+        self.IMGS = player_images
         self.img = self.IMGS[0]
         self.PYGAME = pygame
 
