@@ -131,7 +131,7 @@ def eval_genomes(genomes, config):
     clock = pygame.time.Clock()
 
     run = True
-    
+
     while run and len(players) > 0:
         clock.tick(30)
 
@@ -185,7 +185,6 @@ def eval_genomes(genomes, config):
 
         if add_pipe:
             score += 1
-            # can add this line to give more reward for passing through a rock (not required)
             for genome in ge:
                 genome.fitness += 5
             pipes.append(Rock(WIN_WIDTH, pygame, pipe_img))
@@ -201,8 +200,3 @@ def eval_genomes(genomes, config):
 
         draw_window(win, players, pipes, base, score, gen,
                     pipe_ind, 'Agentes: '+str(len(players)), bg_img, pygame)
-
-        # break if score gets large enough
-        '''if score > 20:
-            pickle.dump(nets[0],open("best.pickle", "wb"))
-            break'''
