@@ -24,7 +24,7 @@ pygame.font.init()  # init font
 
 pygame.mixer.music.load('imgs/music.mp3')
 pygame.mixer.music.play(1)
-pygame.mixer.music.set_volume(0.0)
+pygame.mixer.music.set_volume(0.4)
 
 WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 
